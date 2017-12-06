@@ -11,12 +11,16 @@ class AddPost extends Component {
 
   state = {
     title: ''
-  }
+  };
 
+  
   handleChange = (e) => {
+
     this.setState({
       title: e.target.value
     });
+
+    e.preventDefault();
   }
 
   handleSubmit = (e) => {
@@ -39,14 +43,18 @@ class AddPost extends Component {
     const Header = styled.h1`
       color: #FFF;
     `
-    const AppPostContainer = styled.div`
-      align-self: center;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    `;
 
+    const Wrapper = styled.div`
+      border: 1px solid blue;
+    `;
+    const AppPostContainer = styled.div`
+      // align-self: center;
+      // margin: 0 auto;
+      // display: flex;
+      // flex-direction: column;
+      // align-items: center;
+    `;
+    
     const PostTextbox = styled.input`
       width: 10rem;
     `;
@@ -56,16 +64,21 @@ class AddPost extends Component {
     `;
 
     return (
-      <AppPostContainer className="AddPost">
+      <div className="AddPost">
         <Header>Add A New Post</Header>
-          <input
-            type="text"
-            placeholder="Write the title of your post"
-            onChange={ this.handleChange }
-            value={ this.state.title }
-          />
-        <SubmitPost type="submit" onClick={ this.handleSubmit }>Submit</SubmitPost>
-      </AppPostContainer>
+        <input 
+          type="text" 
+          placeholder="Write the title of your post" 
+          onChange={ this.handleChange } 
+          value={ this.state.title }
+        />
+        <button 
+          type="submit" 
+          onClick={ this.handleSubmit }
+        >
+          Submit
+        </button>
+    </div>
     )
   }
 }

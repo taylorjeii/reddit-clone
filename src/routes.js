@@ -7,7 +7,7 @@ import AddPost from './containers/AddPost';
 
 const Routes = (props) => (
   <Router {...props}>
-    <Route path="/" component={App}>
+    <Route path="/" component={AddPost}>
       <Route path="/posts" component={ Posts }/>
       <Route path="/addpost" component={ AddPost }/>
     </Route>
