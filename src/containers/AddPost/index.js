@@ -39,17 +39,17 @@ class AddPost extends Component {
     const Header = styled.h1`
       color: #FFF;
     `
-    const AppPostContainer = styled.div`
-      align-self: center;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    `;
+    // const AppPostContainer = styled.div`
+    //   align-self: center;
+    //   margin: 0 auto;
+    //   display: flex;
+    //   flex-direction: column;
+    //   align-items: center;
+    // `;
 
-    const PostTextbox = styled.input`
-      width: 10rem;
-    `;
+    // const PostTextbox = styled.input`
+    //   width: 10rem;
+    // `;
 
     const SubmitPost = styled.button`
     display: block;

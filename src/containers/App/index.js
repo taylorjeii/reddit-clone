@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from "firebase";
 import styled from 'styled-components';
+import Routes from '../../routes';
 
 import config from './firebase-config';
 
@@ -14,7 +15,8 @@ class App extends Component {
 
     this.state =  {
       posts: [],
-      loading: false
+      loading: false,
+      firebase: null,
     };
   }
 
@@ -23,11 +25,10 @@ class App extends Component {
     let _this = this;
 
     postsRef.on('value', function (snapshot) {
-      console.log(snapshot.val());
-
       _this.setState({
         posts: snapshot.val(),
-        loading: false
+        loading: false,
+        firebase: firebase.database()
       });
     })
   }
@@ -38,16 +39,15 @@ class App extends Component {
       width: 100%;
       display: flex;
     `;
+
+    console.log(this.state.posts);
     return (
-     <AppContainer>
-     {this.props.children && React.cloneElement(
-       this.props.children, {
-         firebase: firebase.database(),
-         posts: this.state.posts,
-         loading: this.state.loading
-       }
-     )}
-     </AppContainer>
+    <AppContainer className="app-container">
+      <Routes 
+        firebase={this.state.firebase} 
+        posts={this.state.posts}
+      />
+    </AppContainer>
     );
   }
 }
