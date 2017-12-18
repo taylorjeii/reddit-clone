@@ -50,6 +50,7 @@ class Posts extends Component {
       background-color: #598234;
       margin: 1rem 0;
       padding-bottom: 2rem;
+      box-shadow: 0px 0px 3px #222;
     `;
 
     const PostTitle = styled.h1`
@@ -110,7 +111,6 @@ class Posts extends Component {
             </PostWrapper>
           );
         })}
-       
       </PostPageContainer>
     )
   }
