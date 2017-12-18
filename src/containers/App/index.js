@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import * as firebase from "firebase";
 import styled from 'styled-components';
-import Routes from '../../routes';
 
+import Routes from '../../routes';
 import config from './firebase-config';
 
 
@@ -35,12 +35,11 @@ class App extends Component {
 
   render() {
     const AppContainer = styled.div`
-      height: 100%;
-      width: 100%;
-      display: flex;
+      // height: 100%;
+      // width: 100%;
+      // display: flex;
     `;
 
-    console.log(this.state.posts);
     return (
     <AppContainer className="app-container">
       <Routes 

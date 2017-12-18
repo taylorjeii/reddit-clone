@@ -3,22 +3,26 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
+  Redirect
 } from 'react-router-dom';
 
 import Posts from './containers/Posts';
 import AddPost from './containers/AddPost';
+import Navigation from './components/Navigation';
 
 class Routes extends Component {
   render() {
     return (
       <Router>
+        <div>
+        <Navigation />
         <Switch>
           <Redirect exact from="/" to="/posts" />
-          <Route exact path="/posts" render={ (props) =>  <Posts posts={this.props.posts}/> } />
-          <Route exact path="/addpost" component={ AddPost } posts={this.props.posts} />
-          <Route component={() => <h1>NotFound</h1> } />
+          <Route exact path="/posts" render={ (props) =>  <Posts posts={this.props.posts} firebase={this.props.firebase}/> } />
+          <Route exact path="/addpost" render={ (props) =>  <AddPost posts={this.props.posts} firebase={this.props.firebase}/> } />
+          <Route component={ () => <h1>NotFound</h1> } />
         </Switch>
+        </div>
       </Router>
     );
   }

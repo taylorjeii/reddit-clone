@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+import LikeButton from './LikeButton';
 
 class Posts extends Component {
   handleUpvote = (post, key) => {
@@ -33,20 +35,87 @@ class Posts extends Component {
       )
     }
 
+    const PostPageContainer = styled.div`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    `
+
+    const PostWrapper = styled.div`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+      width: 30rem;
+      background-color: #598234;
+      margin: 1rem 0;
+      padding-bottom: 2rem;
+    `;
+
+    const PostTitle = styled.h1`
+    font-family: 'Alegreya', serif;
+    color: #FFF;
+    text-transform: capitalize ;
+    `;
+
+    
+
+    const VoteCountWrapper = styled.div`
+      display: flex;
+      justify-content: space-around;
+      width: 20rem;
+    `;
+
+    const VoteCount = styled.p`
+      color: #FFF;
+      font-family: 'Roboto', sans-serif;
+    `;
+
+
+    const VoteButtonWrapper = styled.div`
+      display: flex;
+      justify-content: space-around;
+      width: 20rem;
+    `;
+
+    const PostText = styled.p`
+      color: #FFF;
+      font-family: 'Roboto', sans-serif;
+    `;
+
+    const PostTextWrapper = styled.div`
+      text-align: justify;
+      padding: 0 1rem;
+    `;
+
+    const VoteIcon = styled.i`
+    
+    `;
+
     return (
-      <div className="Posts">
+      <PostPageContainer>
         { Object.keys(posts).map( key => {
           return (
-            <div key={key}>
-              <h1>{ posts[key].title }</h1>
-              <p>Upvotes: {posts[key].upvote}</p>
-              <p>Downvotes: {posts[key].downvote}</p>
-              <button onClick={ _this.handleUpvote.bind(this, posts[key], key) } type="button">Upvote</button>
-              <button onClick={ _this.handleDownvote.bind(this, posts[key], key) } type="button">Downvote</button>
-            </div>
+            <PostWrapper key={key} id="postWrapper">
+              <PostTitle>{ posts[key].title }</PostTitle>
+              <PostTextWrapper>
+                <PostText>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras semper erat justo, vel hendrerit quam rutrum in. Sed id efficitur odio. Etiam orci ante, elementum eget nibh in, efficitur dapibus libero. Aenean velit arcu, elementum ac diam vel, finibus posuere eros. Aliquam ut sagittis elit. 
+                </PostText>
+             </PostTextWrapper>
+             <VoteCountWrapper>
+              <VoteCount>Likes: {posts[key].upvote}</VoteCount>
+              <VoteCount>Dislikes: {posts[key].downvote}</VoteCount>
+            </VoteCountWrapper>
+              <VoteButtonWrapper>
+                <LikeButton iconType="fa-thumbs-o-up" onClick={ _this.handleUpvote.bind(this, posts[key], key) }/>
+                <LikeButton iconType="fa-thumbs-o-down" onClick={ _this.handleDownvote.bind(this, posts[key], key) }/>
+            </VoteButtonWrapper>                           
+            </PostWrapper>
           );
         })}
-      </div>
+       
+      </PostPageContainer>
     )
   }
 }
