@@ -88,10 +88,6 @@ class Posts extends Component {
       padding: 0 1rem;
     `;
 
-    const VoteIcon = styled.i`
-    
-    `;
-
     return (
       <PostPageContainer>
         { Object.keys(posts).map( key => {
