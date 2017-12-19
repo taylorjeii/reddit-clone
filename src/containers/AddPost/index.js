@@ -7,6 +7,7 @@ class AddPost extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.printFormValues = this.printFormValues.bind(this);
   }
 
   state = {
@@ -23,9 +24,9 @@ class AddPost extends Component {
     e.preventDefault();
 
     this.props.firebase.ref('posts').push({
+      downvote: 0,
       title: this.state.title,
       upvote: 0,
-      downvote: 0
     });
 
     this.setState({
@@ -33,26 +34,84 @@ class AddPost extends Component {
     });
   }
 
+  printFormValues = (values) => {
+    console.log(values);
+  }
+
   render() {
     const Header = styled.h1`
       color: #FFF;
+      font-family: 'Alegreya', serif; 
     `
 
     const SubmitPost = styled.button`
-      display: block;
+      border: 1px solid #FFF;
+      color: #FFF;
+      background-color: #AEBD38;
+      font-size: 1rem;
+      font-family: 'Roboto Condensed', sans-serif;
+      letter-spacing: 1px;
+      margin: 0 .5rem;
+      padding: .5rem;
+      transition: all .2s ease-out;
+
+      &:hover {
+        border-color: #598234;
+        background-color: #598234;
+      }
     `;
 
-    return (
-      <div className="AddPost">
-        <Header>Add A New Post</Header>
-          <input
-            type="text"
-            placeholder="Write the title of your post"
-            onChange={ this.handleChange }
-          value={ this.state.title } 
-          />
+    const addPostContainerStyle = {
+      alignItems: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+    }
 
-        <SubmitPost type="submit" onClick={ this.handleSubmit }>Submit</SubmitPost>
+    const formLabelStyle = {
+      color: '#FFF',
+      display: 'block',
+      fontFamily: 'Alegreya, serif',
+    };
+
+    const formFieldStyle = {
+      alignItems: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+      margin: '1rem'
+    };
+
+    return (
+      <div className="add-post-container" style={addPostContainerStyle}>
+        <Header>Add A New Post</Header>
+          <form onSubmit={submittedValues => console.log(submittedValues)} id="form">
+            <div className="form-field" style={formFieldStyle}>
+            <label style={formLabelStyle} htmlFor="post-title">Post Title</label>
+            <input 
+              type="text"
+              field="postTitle" 
+              id="post-title"
+              placeholder="Write the title of your post"
+              onChange={ this.handleChange }
+              value={ this.state.title }                   
+            />
+            </div>
+            <div className="form-field" style={formFieldStyle}>
+              <label style={formLabelStyle} htmlFor="hello">Post Body</label>
+              <textarea  
+                type="text"
+                rows="10"
+                cols="50"
+                field="hello" 
+                id="hello"
+                placeholder="Write the content post of your here"
+                onChange={ this.handleChange }
+                value={ this.state.title }                   
+              />
+            </div>              
+            <div style={formFieldStyle}>
+              <SubmitPost type="submit" onClick={this.handleSubmit}>Submit</SubmitPost>
+            </div>
+          </form>             
       </div>
     )
   }
