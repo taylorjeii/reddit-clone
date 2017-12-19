@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NavWrapper = styled.nav`
-  display: flex;
-  justify-content: space-between;
   align-items: center;
   background-color: #505160;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
 `;
 
@@ -19,14 +19,23 @@ const AppTitle = styled.h1`
 const LinkWrapper = styled.div`
   display: flex;
   justify-content: space-around;
+  margin-right: 1rem
 `;
 
 const NavLink = styled(Link)`
-  margin: 0 1rem;
-  text-decoration: none;
-  letter-spacing: 1px;
+  border: 1px solid #FFF;
+  color: #FFF;
   font-family: 'Roboto Condensed', sans-serif;
-  color: #fff;
+  letter-spacing: 1px;
+  margin: 0 .5rem;
+  padding: .5rem;
+  text-decoration: none;
+  transition: all .2s ease-out;
+
+  &:hover {
+    border-color: #AEBD38;
+    color: #AEBD38;
+  }
 `;
 
 const Nav = () => (
