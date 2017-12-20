@@ -22,8 +22,8 @@ const ButtonWrapper = styled.span`
   }
 `;
 const LikeButton = (props) => (
-  <ButtonWrapper> 
-    <i className={`fa fa-lg ${props.iconType}`}  onClick={props.onClick} aria-hidden="true"></i>
+  <ButtonWrapper onClick={props.onClick}> 
+    <i className={`fa fa-lg ${props.iconType}`} aria-hidden="true"></i>
   </ButtonWrapper>
 );
 
