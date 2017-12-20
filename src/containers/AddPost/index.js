@@ -5,18 +5,26 @@ class AddPost extends Component {
   constructor() {
     super();
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handlePostTitleChange = this.handlePostTitleChange.bind(this);
+    this.handlePostBodyChange = this.handlePostBodyChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.printFormValues = this.printFormValues.bind(this);
   }
 
   state = {
-    title: ''
+    title: '',
+    postBody: ''
   }
 
-  handleChange = (e) => {
+  handlePostTitleChange = (e) => {
     this.setState({
       title: e.target.value
+    });
+  }
+
+  handlePostBodyChange = (e) => {
+    this.setState({
+      postBody: e.target.value
     });
   }
 
@@ -26,6 +34,7 @@ class AddPost extends Component {
     this.props.firebase.ref('posts').push({
       downvote: 0,
       title: this.state.title,
+      postBody: this.state.postBody,
       upvote: 0,
     });
 
@@ -91,7 +100,7 @@ class AddPost extends Component {
               field="postTitle" 
               id="post-title"
               placeholder="Write the title of your post"
-              onChange={ this.handleChange }
+              onChange={ this.handlePostTitleChange }
               value={ this.state.title }                   
             />
             </div>
@@ -104,8 +113,8 @@ class AddPost extends Component {
                 field="hello" 
                 id="hello"
                 placeholder="Write the content post of your here"
-                onChange={ this.handleChange }
-                value={ this.state.title }                   
+                onChange={ this.handlePostBodyChange }
+                value={ this.state.postBody }                   
               />
             </div>              
             <div style={formFieldStyle}>

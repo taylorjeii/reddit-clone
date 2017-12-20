@@ -6,6 +6,7 @@ class Posts extends Component {
   handleUpvote = (post, key) => {
     this.props.firebase.ref('posts/' + key).set({
       title: post.title,
+      postBody: post.postBody,
       upvote: post.upvote + 1,
       downvote: post.downvote
     });
@@ -14,6 +15,7 @@ class Posts extends Component {
   handleDownvote = (post, key) => {
     this.props.firebase.ref('posts/' + key).set({
       title: post.title,
+      postBody: post.postBody,
       upvote: post.upvote,
       downvote: post.downvote + 1
     });
@@ -97,7 +99,7 @@ class Posts extends Component {
               <PostTitle>{ posts[key].title }</PostTitle>
               <PostTextWrapper>
                 <PostText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras semper erat justo, vel hendrerit quam rutrum in. Sed id efficitur odio. Etiam orci ante, elementum eget nibh in, efficitur dapibus libero. Aenean velit arcu, elementum ac diam vel, finibus posuere eros. Aliquam ut sagittis elit. 
+                  {posts[key].postBody}
                 </PostText>
              </PostTextWrapper>
              <VoteCountWrapper>
