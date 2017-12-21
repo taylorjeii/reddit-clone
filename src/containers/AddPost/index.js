@@ -41,6 +41,8 @@ class AddPost extends Component {
     this.setState({
       title: ''
     });
+
+
   }
 
   printFormValues = (values) => {
@@ -54,19 +56,19 @@ class AddPost extends Component {
     `
 
     const SubmitPost = styled.button`
+      background-color: #AEBD38;
       border: 1px solid #FFF;
       color: #FFF;
-      background-color: #AEBD38;
-      font-size: 1rem;
       font-family: 'Roboto Condensed', sans-serif;
+      font-size: 1rem;
       letter-spacing: 1px;
       margin: 0 .5rem;
       padding: .5rem;
       transition: all .2s ease-out;
 
       &:hover {
-        border-color: #598234;
         background-color: #598234;
+        border-color: #598234;
       }
     `;
 
@@ -89,20 +91,26 @@ class AddPost extends Component {
       margin: '1rem'
     };
 
+    const textInputStyles = {
+      height: '24px',
+      lineHeight: '1.5',
+      width: '100%'
+    }
+
     return (
       <div className="add-post-container" style={addPostContainerStyle}>
         <Header>Add A New Post</Header>
           <form onSubmit={submittedValues => console.log(submittedValues)} id="form">
             <div className="form-field" style={formFieldStyle}>
-            <label style={formLabelStyle} htmlFor="post-title">Post Title</label>
-            <input 
-              type="text"
-              field="postTitle" 
-              id="post-title"
-              placeholder="Write the title of your post"
-              onChange={ this.handlePostTitleChange }
-              value={ this.state.title }                   
-            />
+              <label style={formLabelStyle} htmlFor="post-title">Post Title</label>
+              <input 
+                type="text"
+                field="postTitle" 
+                id="post-title"
+                style={textInputStyles}
+                onChange={ this.handlePostTitleChange }
+                value={ this.state.title }                   
+              />
             </div>
             <div className="form-field" style={formFieldStyle}>
               <label style={formLabelStyle} htmlFor="hello">Post Body</label>
@@ -111,8 +119,7 @@ class AddPost extends Component {
                 rows="10"
                 cols="50"
                 field="hello" 
-                id="hello"
-                placeholder="Write the content post of your here"
+                id="hello"                
                 onChange={ this.handlePostBodyChange }
                 value={ this.state.postBody }                   
               />

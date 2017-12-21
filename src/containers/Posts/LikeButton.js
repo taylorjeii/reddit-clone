@@ -12,8 +12,7 @@ const ButtonWrapper = styled.span`
   border-radius: 50%;
   background-color: #AEBD38;
   box-shadow: 0px 0px 3px #222;
-  transition: all .2s ease-out;
-
+  transition: all .2s ease-out;  
   &:hover {
     transform: translateY(-.1rem);
   }

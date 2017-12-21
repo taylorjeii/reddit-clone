@@ -42,8 +42,8 @@ const Nav = () => (
   <NavWrapper>
     <AppTitle>Reddit Clone</AppTitle>
     <LinkWrapper>
-      <NavLink to="/addpost">Add Post</NavLink>
       <NavLink to="/posts">Posts</NavLink>
+      <NavLink to="/addpost">Add Post</NavLink>
     </LinkWrapper>
   </NavWrapper>
 );
