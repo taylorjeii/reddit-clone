@@ -11,30 +11,30 @@ const NavWrapper = styled.nav`
 `;
 
 const AppTitle = styled.h1`
-  color: #FFF;
-  font-family: 'Alegreya', serif; 
+  color: #fff;
+  font-family: 'Alegreya', serif;
   margin-left: 1rem;
 `;
 
 const LinkWrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-right: 1rem
+  margin-right: 1rem;
 `;
 
 const NavLink = styled(Link)`
-  border: 1px solid #FFF;
-  color: #FFF;
+  border: 1px solid #fff;
+  color: #fff;
   font-family: 'Roboto Condensed', sans-serif;
   letter-spacing: 1px;
-  margin: 0 .5rem;
-  padding: .5rem;
+  margin: 0 0.5rem;
+  padding: 0.5rem;
   text-decoration: none;
-  transition: all .2s ease-out;
+  transition: all 0.2s ease-out;
 
   &:hover {
-    border-color: #AEBD38;
-    color: #AEBD38;
+    border-color: #aebd38;
+    color: #aebd38;
   }
 `;
 

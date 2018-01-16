@@ -1,47 +1,50 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import LikeButton from './LikeButton';
 
 class Posts extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleDownvote = this.handleDownvote.bind(this);
+    this.handleUpvote = this.handleUpvote.bind(this);
+  }
   handleUpvote = (post, key) => {
-    this.props.firebase.ref('posts/' + key).set({
+    this.props.firebase.ref(`posts/${key}`).set({
       title: post.title,
       postBody: post.postBody,
       upvote: post.upvote + 1,
-      downvote: post.downvote
+      downvote: post.downvote,
     });
-  }
+  };
 
-  handleDownvote = (post, key) => {
-    this.props.firebase.ref('posts/' + key).set({
+  handleDownvote = (post, key) => {    
+    this.props.firebase.ref(`posts/${key}`).set({
       title: post.title,
       postBody: post.postBody,
       upvote: post.upvote,
-      downvote: post.downvote + 1
+      downvote: post.downvote + 1,
     });
-  }
-  
-  render() {
-    let { posts } = this.props;
-    let _this = this;
+  };
 
-    if(!posts){
+  render() {
+    const { posts } = this.props;
+    let self = this;
+
+    if (!posts) {
       return false;
     }
 
     if (this.props.loading) {
-      return (
-        <div>
-          Loading...
-        </div>
-      )
+      return <div>Loading...</div>;
     }
 
     const PostPageContainer = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
-    `
+    `;
 
     const PostWrapper = styled.div`
       display: flex;
@@ -56,12 +59,10 @@ class Posts extends Component {
     `;
 
     const PostTitle = styled.h1`
-    font-family: 'Alegreya', serif;
-    color: #FFF;
-    text-transform: capitalize ;
+      font-family: 'Alegreya', serif;
+      color: #fff;
+      text-transform: capitalize;
     `;
-
-    
 
     const VoteCountWrapper = styled.div`
       display: flex;
@@ -70,10 +71,9 @@ class Posts extends Component {
     `;
 
     const VoteCount = styled.p`
-      color: #FFF;
+      color: #fff;
       font-family: 'Roboto', sans-serif;
     `;
-
 
     const VoteButtonWrapper = styled.div`
       display: flex;
@@ -82,7 +82,7 @@ class Posts extends Component {
     `;
 
     const PostText = styled.p`
-      color: #FFF;
+      color: #fff;
       font-family: 'Roboto', sans-serif;
     `;
 
@@ -91,31 +91,37 @@ class Posts extends Component {
       padding: 0 1rem;
     `;
 
+    
     return (
       <PostPageContainer>
-        { Object.keys(posts).map( key => {
-          return (
-            <PostWrapper key={key} id="postWrapper">
-              <PostTitle>{ posts[key].title }</PostTitle>
-              <PostTextWrapper>
-                <PostText>
-                  {posts[key].postBody}
-                </PostText>
-             </PostTextWrapper>
-             <VoteCountWrapper>
+        {Object.keys(posts).map(key => (
+          <PostWrapper key={key} id="postWrapper">
+            <PostTitle>{posts[key].title}</PostTitle>
+            <PostTextWrapper>
+              <PostText>{posts[key].postBody}</PostText>
+            </PostTextWrapper>
+            <VoteCountWrapper>
               <VoteCount>Likes: {posts[key].upvote}</VoteCount>
               <VoteCount>Dislikes: {posts[key].downvote}</VoteCount>
             </VoteCountWrapper>
-              <VoteButtonWrapper>
-                <LikeButton iconType="fa-thumbs-o-up" onClick={ _this.handleUpvote.bind(this, posts[key], key) }/>
-                <LikeButton iconType="fa-thumbs-o-down" onClick={ _this.handleDownvote.bind(this, posts[key], key) }/>
-            </VoteButtonWrapper>                           
-            </PostWrapper>
-          );
-        })}
+            <VoteButtonWrapper>
+              <LikeButton iconType="fa-thumbs-o-up" onClick={ () => self.handleUpvote(posts[key], key)} />
+              <LikeButton iconType="fa-thumbs-o-down" onClick={ () => self.handleDownvote(posts[key], key)} />
+            </VoteButtonWrapper>
+          </PostWrapper>
+        ))}
       </PostPageContainer>
-    )
+    );
   }
 }
+Posts.defaultProps = {
+  posts: [],
+  loading: false,
+};
+Posts.propTypes = {
+  firebase: PropTypes.shape(),
+  posts: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  loading: PropTypes.bool,
+};
 
 export default Posts;

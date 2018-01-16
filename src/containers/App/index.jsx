@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
 import styled from 'styled-components';
 
 import Routes from '../../routes';
 import config from './firebase-config';
-
 
 class App extends Component {
   constructor() {
@@ -13,24 +12,26 @@ class App extends Component {
     // Initialize Firebase
     firebase.initializeApp(config);
 
-    this.state =  {
-      posts: [],
-      loading: false,
+    this.state = {
+      posts: {},
+      // loading: false,
       firebase: null,
     };
   }
 
   componentWillMount() {
+    // eslint-disable-next-line prefer-const
     let postsRef = firebase.database().ref('posts');
-    let _this = this;
+    // eslint-disable-next-line prefer-const
+    let self = this;
 
-    postsRef.on('value', function (snapshot) {
-      _this.setState({
+    postsRef.on('value', (snapshot) => {
+      self.setState({
         posts: snapshot.val(),
-        loading: false,
-        firebase: firebase.database()
+        // loading: false,
+        firebase: firebase.database(),
       });
-    })
+    });
   }
 
   render() {
@@ -39,14 +40,11 @@ class App extends Component {
       // width: 100%;
       // display: flex;
     `;
-
+    // console.log(`app: ${this.state.posts}`);
     return (
-    <AppContainer className="app-container">
-      <Routes 
-        firebase={this.state.firebase} 
-        posts={this.state.posts}
-      />
-    </AppContainer>
+      <AppContainer className="app-container">
+        <Routes firebase={this.state.firebase} posts={this.state.posts} />
+      </AppContainer>
     );
   }
 }
