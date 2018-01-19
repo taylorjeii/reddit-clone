@@ -9,18 +9,26 @@ class AddPost extends Component {
 
     this.handlePostTitleChange = this.handlePostTitleChange.bind(this);
     this.handlePostBodyChange = this.handlePostBodyChange.bind(this);
+    this.handlePostedByChange = this.handlePostedByChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.printFormValues = this.printFormValues.bind(this);
   }
 
   state = {
-    title: '',
     postBody: '',
+    postedBy: '',
+    title: '',
   };
 
   handlePostTitleChange = (e) => {
     this.setState({
       title: e.target.value,
+    });
+  };
+
+  handlePostedByChange = (e) => {
+    this.setState({
+      postedBy: e.target.value,
     });
   };
 
@@ -35,9 +43,10 @@ class AddPost extends Component {
 
     this.props.firebase.ref('posts').push({
       downvote: 0,
-      title: this.state.title,
       postBody: this.state.postBody,
       postDate: moment().format("MMM Do YYYY"),
+      postedBy: this.state.postedBy,
+      title: this.state.title,
       upvote: 0,
     });
 
@@ -83,6 +92,7 @@ class AddPost extends Component {
       color: '#FFF',
       display: 'block',
       fontFamily: 'Alegreya, serif',
+      width: '100%',
     };
 
     const formFieldStyle = {
@@ -98,16 +108,31 @@ class AddPost extends Component {
       width: '100%',
     };
 
+    const textAreaStyles = {
+      width: '100%'
+    }
+
     return (
       <div className="add-post-container" style={addPostContainerStyle}>
         <Header>Add A New Post</Header>
         <form onSubmit={submittedValues => console.log(submittedValues)} id="form">
           <div className="form-field" style={formFieldStyle}>
+            <label style={formLabelStyle} htmlFor="posted-by">
+              Name
+              <input
+                type="text"
+                id="posted-by"
+                style={textInputStyles}
+                onChange={this.handlePostedByChange}
+                value={this.state.postedBy}
+              />
+            </label>
+          </div>
+          <div className="form-field" style={formFieldStyle}>
             <label style={formLabelStyle} htmlFor="post-title">
               Post Title
               <input
                 type="text"
-                field="postTitle"
                 id="post-title"
                 style={textInputStyles}
                 onChange={this.handlePostTitleChange}
@@ -116,14 +141,14 @@ class AddPost extends Component {
             </label>
           </div>
           <div className="form-field" style={formFieldStyle}>
-            <label style={formLabelStyle} htmlFor="hello">
+            <label style={formLabelStyle} htmlFor="post-body">
               Post Body
               <textarea
                 type="text"
                 rows="10"
                 cols="50"
-                field="hello"
-                id="hello"
+                id="post-body"
+                style={textAreaStyles}
                 onChange={this.handlePostBodyChange}
                 value={this.state.postBody}
               />
@@ -142,7 +167,7 @@ class AddPost extends Component {
 }
 
 AddPost.propTypes = {
-  firebase: PropTypes.shape().isRequired,
+  firebase: PropTypes.shape(),
 };
 
 export default AddPost;

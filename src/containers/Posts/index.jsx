@@ -15,6 +15,7 @@ class Posts extends Component {
       title: post.title,
       postBody: post.postBody,
       postDate: post.postDate,
+      postedBy: post.postedBy,
       upvote: post.upvote + 1,
       downvote: post.downvote,
     });
@@ -25,6 +26,7 @@ class Posts extends Component {
       title: post.title,
       postBody: post.postBody,
       postDate: post.postDate,
+      postedBy: post.postedBy,
       upvote: post.upvote,
       downvote: post.downvote + 1,
     });
@@ -65,6 +67,7 @@ class Posts extends Component {
       color: #FFF;
       text-transform: capitalize;
       margin-bottom: 0;
+      text-align: center;
     `;
 
     const VoteCountWrapper = styled.div`
@@ -105,14 +108,21 @@ class Posts extends Component {
       color: #FFF;
     `;
 
+    const PostedBy = styled.small`
+      color: #FFF;
+      font-style: italic;
+    `;
+
     console.log(posts);
     return (
       <PostPageContainer>
         {Object.keys(posts).map(key => (
           <PostWrapper key={key} id="postWrapper">
             <PostHeader>
+              <p>  </p>
               <PostTitle>{posts[key].title}</PostTitle>
               <PostDate>{posts[key].postDate}</PostDate>
+              <PostedBy>Posted By: {posts[key].postedBy}</PostedBy>
             </PostHeader>
             <PostTextWrapper>
               <PostText>{posts[key].postBody}</PostText>
@@ -126,7 +136,7 @@ class Posts extends Component {
               <LikeButton iconType="fa-thumbs-o-down" onClick={ () => self.handleDownvote(posts[key], key)} />
             </VoteButtonWrapper>
           </PostWrapper>
-        ))}
+        )).reverse()}
       </PostPageContainer>
     );
   }
@@ -135,6 +145,7 @@ Posts.defaultProps = {
   posts: [],
   loading: false,
 };
+
 Posts.propTypes = {
   firebase: PropTypes.shape(),
   posts: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
