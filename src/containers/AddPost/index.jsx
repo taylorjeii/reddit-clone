@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 class AddPost extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class AddPost extends Component {
       downvote: 0,
       title: this.state.title,
       postBody: this.state.postBody,
+      postDate: moment().format("MMM Do YYYY"),
       upvote: 0,
     });
 

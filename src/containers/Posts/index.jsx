@@ -14,6 +14,7 @@ class Posts extends Component {
     this.props.firebase.ref(`posts/${key}`).set({
       title: post.title,
       postBody: post.postBody,
+      postDate: post.postDate,
       upvote: post.upvote + 1,
       downvote: post.downvote,
     });
@@ -23,6 +24,7 @@ class Posts extends Component {
     this.props.firebase.ref(`posts/${key}`).set({
       title: post.title,
       postBody: post.postBody,
+      postDate: post.postDate,
       upvote: post.upvote,
       downvote: post.downvote + 1,
     });
@@ -60,8 +62,9 @@ class Posts extends Component {
 
     const PostTitle = styled.h1`
       font-family: 'Alegreya', serif;
-      color: #fff;
+      color: #FFF;
       text-transform: capitalize;
+      margin-bottom: 0;
     `;
 
     const VoteCountWrapper = styled.div`
@@ -71,7 +74,7 @@ class Posts extends Component {
     `;
 
     const VoteCount = styled.p`
-      color: #fff;
+      color: #FFF;
       font-family: 'Roboto', sans-serif;
     `;
 
@@ -79,6 +82,13 @@ class Posts extends Component {
       display: flex;
       justify-content: space-around;
       width: 20rem;
+    `;
+
+    const PostHeader = styled.div`
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
     `;
 
     const PostText = styled.p`
@@ -91,12 +101,19 @@ class Posts extends Component {
       padding: 0 1rem;
     `;
 
-    
+    const PostDate = styled.small`
+      color: #FFF;
+    `;
+
+    console.log(posts);
     return (
       <PostPageContainer>
         {Object.keys(posts).map(key => (
           <PostWrapper key={key} id="postWrapper">
-            <PostTitle>{posts[key].title}</PostTitle>
+            <PostHeader>
+              <PostTitle>{posts[key].title}</PostTitle>
+              <PostDate>{posts[key].postDate}</PostDate>
+            </PostHeader>
             <PostTextWrapper>
               <PostText>{posts[key].postBody}</PostText>
             </PostTextWrapper>
