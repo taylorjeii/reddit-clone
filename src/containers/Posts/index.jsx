@@ -17,18 +17,18 @@ class Posts extends Component {
       postDate: post.postDate,
       postedBy: post.postedBy,
       upvote: post.upvote + 1,
-      downvote: post.downvote,
+      downvote: post.downvote
     });
   };
 
-  handleDownvote = (post, key) => {    
+  handleDownvote = (post, key) => {
     this.props.firebase.ref(`posts/${key}`).set({
       title: post.title,
       postBody: post.postBody,
       postDate: post.postDate,
       postedBy: post.postedBy,
       upvote: post.upvote,
-      downvote: post.downvote + 1,
+      downvote: post.downvote + 1
     });
   };
 
@@ -64,7 +64,7 @@ class Posts extends Component {
 
     const PostTitle = styled.h1`
       font-family: 'Alegreya', serif;
-      color: #FFF;
+      color: #fff;
       text-transform: capitalize;
       margin-bottom: 0;
       text-align: center;
@@ -77,7 +77,7 @@ class Posts extends Component {
     `;
 
     const VoteCount = styled.p`
-      color: #FFF;
+      color: #fff;
       font-family: 'Roboto', sans-serif;
     `;
 
@@ -105,51 +105,52 @@ class Posts extends Component {
     `;
 
     const PostDate = styled.small`
-      color: #FFF;
+      color: #fff;
     `;
 
     const PostedBy = styled.small`
-      color: #FFF;
+      color: #fff;
       font-style: italic;
     `;
 
-    console.log(posts);
     return (
       <PostPageContainer>
-        {Object.keys(posts).map(key => (
-          <PostWrapper key={key} id="postWrapper">
-            <PostHeader>
-              <p>  </p>
-              <PostTitle>{posts[key].title}</PostTitle>
-              <PostDate>{posts[key].postDate}</PostDate>
-              <PostedBy>Posted By: {posts[key].postedBy}</PostedBy>
-            </PostHeader>
-            <PostTextWrapper>
-              <PostText>{posts[key].postBody}</PostText>
-            </PostTextWrapper>
-            <VoteCountWrapper>
-              <VoteCount>Likes: {posts[key].upvote}</VoteCount>
-              <VoteCount>Dislikes: {posts[key].downvote}</VoteCount>
-            </VoteCountWrapper>
-            <VoteButtonWrapper>
-              <LikeButton iconType="fa-thumbs-o-up" onClick={ () => self.handleUpvote(posts[key], key)} />
-              <LikeButton iconType="fa-thumbs-o-down" onClick={ () => self.handleDownvote(posts[key], key)} />
-            </VoteButtonWrapper>
-          </PostWrapper>
-        )).reverse()}
+        {Object.keys(posts)
+          .map(key => (
+            <PostWrapper key={key} id="postWrapper">
+              <PostHeader>
+                <p> </p>
+                <PostTitle>{posts[key].title}</PostTitle>
+                <PostDate>{posts[key].postDate}</PostDate>
+                <PostedBy>Posted By: {posts[key].postedBy}</PostedBy>
+              </PostHeader>
+              <PostTextWrapper>
+                <PostText>{posts[key].postBody}</PostText>
+              </PostTextWrapper>
+              <VoteCountWrapper>
+                <VoteCount>Likes: {posts[key].upvote}</VoteCount>
+                <VoteCount>Dislikes: {posts[key].downvote}</VoteCount>
+              </VoteCountWrapper>
+              <VoteButtonWrapper>
+                <LikeButton iconType="fa-thumbs-o-up" onClick={() => self.handleUpvote(posts[key], key)} />
+                <LikeButton iconType="fa-thumbs-o-down" onClick={() => self.handleDownvote(posts[key], key)} />
+              </VoteButtonWrapper>
+            </PostWrapper>
+          ))
+          .reverse()}
       </PostPageContainer>
     );
   }
 }
 Posts.defaultProps = {
   posts: [],
-  loading: false,
+  loading: false
 };
 
 Posts.propTypes = {
   firebase: PropTypes.shape(),
   posts: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  loading: PropTypes.bool,
+  loading: PropTypes.bool
 };
 
 export default Posts;

@@ -1,9 +1,8 @@
-import React, { Component } from "react";
-import firebase, { database } from "./firebase-config";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import { db, firebase } from '../../firebase';
+import styled from 'styled-components';
 
-import Routes from "../../routes";
-import config from "./firebase-config";
+import Routes from '../../routes';
 
 class App extends Component {
   constructor() {
@@ -18,15 +17,15 @@ class App extends Component {
 
   componentWillMount() {
     // eslint-disable-next-line prefer-const
-    let postsRef = database.ref("posts");
+    let postsRef = db.getAllPosts();
     // eslint-disable-next-line prefer-const
     let self = this;
 
-    postsRef.on("value", snapshot => {
+    postsRef.on('value', snapshot => {
       self.setState({
         posts: snapshot.val(),
         // loading: false,
-        firebase: database
+        firebase: db.getDatabase()
       });
     });
   }
