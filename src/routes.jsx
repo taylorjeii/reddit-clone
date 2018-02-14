@@ -12,19 +12,12 @@ const Routes = props => (
       <Navigation />
       <Switch>
         <Redirect exact from="/" to="/posts" />
-        <Route exact path="/posts" render={() => <Posts firebase={props.firebase} />} />
-        <Route exact path="/addpost" render={() => <AddPost firebase={props.firebase} />} />
+        <Route exact path="/posts" component={Posts} />
+        <Route exact path="/addpost" component={AddPost} />
         <Route component={() => <h1>NotFound</h1>} />
       </Switch>
     </div>
   </Router>
 );
-
-Routes.defaultProps = {
-  firebase: {}
-};
-Routes.propTypes = {
-  firebase: PropTypes.object
-};
 
 export default Routes;
