@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { db } from '../../firebase/';
-import LikeButton from './LikeButton';
+import LikeButton from '../../components/LikeButton';
 
 const LoadingWrapper = styled.div`
   align-items: center;
