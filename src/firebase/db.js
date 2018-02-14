@@ -1,10 +1,5 @@
 import { db } from './firebase';
-
-// export const doCreateUser = (id, username, email) =>
-//   db.ref(`users/${id}`).set({
-//     username,
-//     email
-//   });
+import moment from 'moment';
 
 export const upVotePost = (post, key) =>
   db.ref(`posts/${key}`).set({
@@ -26,12 +21,17 @@ export const downVotePost = (post, key) =>
     downvote: post.downvote + 1
   });
 
+export const addPost = (postBody, postedBy, title) => {
+  db.ref('posts').push({
+    downvote: 0,
+    postBody: postBody,
+    postDate: moment().format('MMM Do YYYY'),
+    postedBy: postedBy,
+    title: title,
+    upvote: 0
+  });
+};
+
 export const getDatabase = () => db;
 
-export const getAllPosts = () => {
-  return db.ref('posts');
-  // var a = db.ref('posts').on('value', snapshot => {
-  //   return snapshot.val();
-  // });
-  // console.log(a);
-};
+export const getAllPosts = () => db.ref('posts');
