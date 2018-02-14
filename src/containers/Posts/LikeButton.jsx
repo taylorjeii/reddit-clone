@@ -20,6 +20,7 @@ const ButtonWrapper = styled.span`
     color: #fff;
   }
 `;
+
 const LikeButton = props => (
   <ButtonWrapper onClick={props.onClick}>
     <i className={`fa fa-lg ${props.iconType}`} aria-hidden="true" />
@@ -28,7 +29,7 @@ const LikeButton = props => (
 
 LikeButton.propTypes = {
   onClick: PropTypes.func.isRequired,
-  iconType: PropTypes.string.isRequired,
+  iconType: PropTypes.string.isRequired
 };
 
 export default LikeButton;

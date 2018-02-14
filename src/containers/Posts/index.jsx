@@ -33,8 +33,7 @@ class Posts extends Component {
   componentWillMount() {
     db.getAllPosts().on('value', snapshot => {
       this.setState({
-        posts: snapshot.val(),
-        firebase: db.getDatabase()
+        posts: snapshot.val()
       });
     });
   }
@@ -151,15 +150,5 @@ class Posts extends Component {
     );
   }
 }
-Posts.defaultProps = {
-  posts: [],
-  loading: false
-};
-
-Posts.propTypes = {
-  firebase: PropTypes.shape(),
-  posts: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  loading: PropTypes.bool
-};
 
 export default Posts;
