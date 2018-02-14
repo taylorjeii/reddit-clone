@@ -1,73 +1,82 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
+import { db } from '../../firebase/';
 import LikeButton from './LikeButton';
+
+const LoadingWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+
+  > h1 {
+    color: #fff;
+  }
+`;
 
 class Posts extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      posts: null,
+      loading: true
+    };
     this.handleDownvote = this.handleDownvote.bind(this);
     this.handleUpvote = this.handleUpvote.bind(this);
   }
-  handleUpvote = (post, key) => {
-    this.props.firebase.ref(`posts/${key}`).set({
-      title: post.title,
-      postBody: post.postBody,
-      postDate: post.postDate,
-      postedBy: post.postedBy,
-      upvote: post.upvote + 1,
-      downvote: post.downvote
-    });
-  };
 
-  handleDownvote = (post, key) => {
-    this.props.firebase.ref(`posts/${key}`).set({
-      title: post.title,
-      postBody: post.postBody,
-      postDate: post.postDate,
-      postedBy: post.postedBy,
-      upvote: post.upvote,
-      downvote: post.downvote + 1
+  componentWillMount() {
+    db.getAllPosts().on('value', snapshot => {
+      this.setState({
+        posts: snapshot.val(),
+        firebase: db.getDatabase()
+      });
     });
-  };
+  }
+
+  handleUpvote = (post, key) => db.upVotePost(post, key);
+  handleDownvote = (post, key) => db.downVotePost(post, key);
 
   render() {
-    const { posts } = this.props;
-    let self = this;
+    const { posts } = this.state;
 
     if (!posts) {
-      return false;
-    }
-
-    if (this.props.loading) {
-      return <div>Loading...</div>;
+      return (
+        <LoadingWrapper>
+          <h1>Loading...</h1>
+        </LoadingWrapper>
+      );
     }
 
     const PostPageContainer = styled.div`
+      align-items: center;
       display: flex;
       flex-direction: column;
-      align-items: center;
     `;
 
     const PostWrapper = styled.div`
+      align-items: center;
+      background-color: #598234;
+      box-shadow: 0px 0px 3px #222;
       display: flex;
       flex-direction: column;
-      align-items: center;
       margin: 0 auto;
-      width: 30rem;
-      background-color: #598234;
       margin: 1rem 0;
       padding-bottom: 2rem;
-      box-shadow: 0px 0px 3px #222;
+      width: 30rem;
     `;
 
     const PostTitle = styled.h1`
-      font-family: 'Alegreya', serif;
       color: #fff;
-      text-transform: capitalize;
+      font-family: 'Alegreya', serif;
       margin-bottom: 0;
       text-align: center;
+      text-transform: capitalize;
     `;
 
     const VoteCountWrapper = styled.div`
@@ -132,8 +141,8 @@ class Posts extends Component {
                 <VoteCount>Dislikes: {posts[key].downvote}</VoteCount>
               </VoteCountWrapper>
               <VoteButtonWrapper>
-                <LikeButton iconType="fa-thumbs-o-up" onClick={() => self.handleUpvote(posts[key], key)} />
-                <LikeButton iconType="fa-thumbs-o-down" onClick={() => self.handleDownvote(posts[key], key)} />
+                <LikeButton iconType="fa-thumbs-o-up" onClick={() => this.handleUpvote(posts[key], key)} />
+                <LikeButton iconType="fa-thumbs-o-down" onClick={() => this.handleDownvote(posts[key], key)} />
               </VoteButtonWrapper>
             </PostWrapper>
           ))

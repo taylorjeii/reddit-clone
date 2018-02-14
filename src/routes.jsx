@@ -12,16 +12,8 @@ const Routes = props => (
       <Navigation />
       <Switch>
         <Redirect exact from="/" to="/posts" />
-        <Route
-          exact
-          path="/posts"
-          render={() => <Posts posts={props.posts} firebase={props.firebase} />}
-        />
-        <Route
-          exact
-          path="/addpost"
-          render={() => <AddPost posts={props.posts} firebase={props.firebase} />}
-        />
+        <Route exact path="/posts" render={() => <Posts firebase={props.firebase} />} />
+        <Route exact path="/addpost" render={() => <AddPost firebase={props.firebase} />} />
         <Route component={() => <h1>NotFound</h1>} />
       </Switch>
     </div>
@@ -29,12 +21,10 @@ const Routes = props => (
 );
 
 Routes.defaultProps = {
-  posts: [],
-  firebase: {},
+  firebase: {}
 };
 Routes.propTypes = {
-  posts: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  firebase: PropTypes.object,
+  firebase: PropTypes.object
 };
 
 export default Routes;
