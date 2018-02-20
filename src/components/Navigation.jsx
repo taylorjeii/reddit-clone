@@ -43,7 +43,8 @@ const Nav = () => (
     <AppTitle>Reddit Clone</AppTitle>
     <LinkWrapper>
       <NavLink to="/posts">Posts</NavLink>
-      <NavLink to="/addpost">Add Post</NavLink>
+      <NavLink to="/add-post">Add Post</NavLink>
+      <NavLink to="/sign-up">Sign Up</NavLink>
     </LinkWrapper>
   </NavWrapper>
 );

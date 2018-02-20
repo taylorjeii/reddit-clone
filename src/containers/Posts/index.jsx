@@ -31,11 +31,17 @@ class Posts extends Component {
   }
 
   componentWillMount() {
-    db.getAllPosts().on('value', snapshot => {
-      this.setState({
-        posts: snapshot.val()
-      });
-    });
+    db.getAllPosts().on(
+      'value',
+      snapshot => {
+        this.setState({
+          posts: snapshot.val()
+        });
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   handleUpvote = (post, key) => db.upVotePost(post, key);
