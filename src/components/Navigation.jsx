@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import SignOutButton from '../components/SignOut';
+
 const NavWrapper = styled.nav`
   align-items: center;
   background-color: #505160;
@@ -38,15 +40,24 @@ const NavLink = styled(Link)`
   }
 `;
 
-const Nav = () => (
+const Nav = ({ authUser }) => (
   <NavWrapper>
     <AppTitle>Reddit Clone</AppTitle>
-    <LinkWrapper>
-      <NavLink to="/posts">Posts</NavLink>
-      <NavLink to="/add-post">Add Post</NavLink>
-      <NavLink to="/sign-up">Sign Up</NavLink>
-    </LinkWrapper>
+    {authUser ? <AuthLinks /> : <NonAuthLinks />}
   </NavWrapper>
+);
+
+const NonAuthLinks = () => (
+  <LinkWrapper>
+    <NavLink to="/sign-in">Sign In</NavLink>
+  </LinkWrapper>
+);
+const AuthLinks = () => (
+  <LinkWrapper>
+    <NavLink to="/posts">Posts</NavLink>
+    <NavLink to="/add-post">Add Post</NavLink>
+    <SignOutButton />
+  </LinkWrapper>
 );
 
 export default Nav;
