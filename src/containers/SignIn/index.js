@@ -6,7 +6,7 @@ import SignUpLink from '../../components/SignUpLink';
 
 const SignIn = ({ history }) => (
   <div>
-    <h1>Sign Up</h1>
+    <h1>Sign In</h1>
     <SignInForm history={history} />
     <SignUpLink />
   </div>

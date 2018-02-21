@@ -56,7 +56,7 @@ class SignInForm extends Component {
         />
 
         <button disabled={isInvalid} type="submit">
-          Sign Up
+          Sign In
         </button>
         {error && <p>{error.message}</p>}
       </form>
