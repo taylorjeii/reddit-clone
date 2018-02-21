@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import SignOutButton from '../components/SignOut';
 
@@ -40,12 +41,16 @@ const NavLink = styled(Link)`
   }
 `;
 
-const Nav = ({ authUser }) => (
+const Nav = (props, { authUser }) => (
   <NavWrapper>
     <AppTitle>Reddit Clone</AppTitle>
     {authUser ? <AuthLinks /> : <NonAuthLinks />}
   </NavWrapper>
 );
+
+Nav.contextTypes = {
+  authUser: PropTypes.object
+};
 
 const NonAuthLinks = () => (
   <LinkWrapper>
