@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import styled from 'styled-components';
 
 import { db, firebase } from '../../firebase';
-import IsAuthenticated from '../../components/IsAuthenticated';
+import IsAuthenticated from '../../components/HOCs/IsAuthenticated';
 import Landing from '../Home';
 import Posts from '../Posts';
 import AddPost from '../AddPost';
