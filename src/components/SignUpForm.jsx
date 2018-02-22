@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+import * as routes from '../constants/routes';
 import TextInput from './FormControls/TextInput';
 import SubmitButton from './FormControls/SubmitButton';
 import ErrorNotification from './FormControls/ErrorNotification';
@@ -41,7 +42,7 @@ class SignUpForm extends Component {
       .doCreateUserWithEmailAndPassword(email, password)
       .then(() => {
         this.setState(() => ({ ...INITIAL_STATE }));
-        this.props.history.push('/');
+        this.props.history.push(`${routes.HOME}`);
       })
       .catch(error => {
         this.setState(byPropKey('error', error));

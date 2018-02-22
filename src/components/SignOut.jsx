@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
+import * as routes from '../constants/routes';
 import { auth } from '../firebase';
 
 const SignOutBtn = styled.a`
@@ -24,7 +25,7 @@ const SignOutBtn = styled.a`
 const SignOutButton = ({ history }) => {
   const signUserOut = () => {
     auth.doSignOut();
-    history.push('/');
+    history.push(`${routes.HOME}`);
   };
   return (
     <SignOutBtn type="button" onClick={() => signUserOut()}>

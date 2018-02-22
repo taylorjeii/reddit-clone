@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import * as routes from '../constants/routes';
 import SignOutButton from '../components/SignOut';
 
 const NavWrapper = styled.nav`
@@ -50,13 +51,13 @@ const Nav = (props, { authUser }) => (
 
 const NonAuthLinks = () => (
   <LinkWrapper>
-    <NavLink to="/sign-in">Sign In</NavLink>
+    <NavLink to={routes.SIGN_IN}>Sign In</NavLink>
   </LinkWrapper>
 );
 const AuthLinks = () => (
   <LinkWrapper>
-    <NavLink to="/posts">Posts</NavLink>
-    <NavLink to="/add-post">Add Post</NavLink>
+    <NavLink to={routes.POSTS}>Posts</NavLink>
+    <NavLink to={routes.ADD_POST}>Add Post</NavLink>
     <SignOutButton />
   </LinkWrapper>
 );

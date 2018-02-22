@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+import * as routes from '../constants/routes';
 import { auth } from '../firebase';
 import TextInput from './FormControls/TextInput';
 import SubmitButton from './FormControls/SubmitButton';
@@ -39,7 +40,7 @@ class SignInForm extends Component {
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState(() => ({ ...INITIAL_STATE }));
-        this.props.history.push('/posts');
+        this.props.history.push(`${routes.POSTS}`);
       })
       .catch(error => {
         this.setState(byPropKey('error', error));

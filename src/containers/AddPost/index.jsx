@@ -167,4 +167,8 @@ AddPost.propTypes = {
   firebase: PropTypes.shape()
 };
 
+AddPost.contextTypes = {
+  authUser: PropTypes.object
+};
+
 export default AddPost;
