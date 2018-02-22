@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ErrorMessage = styled.p`
-  color: #fff;
-  padding: 1rem;
   background: #ff0033;
+  color: #fff;
   margin: 0;
+  padding: 1rem;
 `;
 
 const ErrorWrapper = styled.div`
