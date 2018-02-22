@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { firebase, auth } from '../../firebase';
+import { firebase } from '../../firebase';
 
 const IsAuthenticated = Component => {
   class Authenticate extends React.Component {

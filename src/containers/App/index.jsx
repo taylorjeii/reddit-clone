@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import styled from 'styled-components';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { db, firebase } from '../../firebase';
 import IsAuthenticated from '../../components/HOCs/IsAuthenticated';
 import Landing from '../Home';
 import Posts from '../Posts';

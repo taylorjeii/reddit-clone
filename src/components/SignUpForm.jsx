@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import TextInput from './FormControls/TextInput';
@@ -35,7 +34,7 @@ class SignUpForm extends Component {
   }
 
   onSubmit = event => {
-    const { username, email, password, passWordConfirm } = this.state;
+    const { email, password } = this.state;
 
     // create new user
     auth
