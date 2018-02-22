@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { auth } from '../firebase';
 import TextInput from './FormControls/TextInput';
 import SubmitButton from './FormControls/SubmitButton';
+import ErrorNotification from './FormControls/ErrorNotification';
 
 const INITIAL_STATE = {
   email: '',
@@ -112,7 +113,7 @@ class SignInForm extends Component {
           placeholder="Password"
         />
         <SubmitButton disabled={isInvalid} type="submit" text="Sign In" />
-        <ErrorWrapper>{error && <ErrorMessage>{error.message}</ErrorMessage>}</ErrorWrapper>
+        <ErrorNotification error={error} />
       </Form>
     );
   }
