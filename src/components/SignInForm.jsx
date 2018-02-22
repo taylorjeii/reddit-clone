@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { auth } from '../firebase';
+import TextInput from './FormControls/TextInput';
 
 const INITIAL_STATE = {
   email: '',
@@ -55,6 +56,18 @@ const SignInBtn = styled.button`
   }
 `;
 
+const ErrorMessage = styled.p`
+  color: #fff;
+  padding: 1rem;
+  background: #ff0033;
+  margin: 0;
+`;
+
+const ErrorWrapper = styled.div`
+  position: absolute;
+  top: 0;
+`;
+
 class SignInForm extends Component {
   constructor(props) {
     super(props);
@@ -85,26 +98,23 @@ class SignInForm extends Component {
 
     return (
       <Form onSubmit={this.onSubmit}>
-        <FormField>
-          <Input
-            value={email}
-            onChange={event => this.setState(byPropKey('email', event.target.value))}
-            type="text"
-            placeholder="Email"
-          />
-        </FormField>
-        <FormField>
-          <Input
-            value={password}
-            onChange={event => this.setState(byPropKey('password', event.target.value))}
-            type="password"
-            placeholder="Password"
-          />
-        </FormField>
+        <TextInput
+          value={email}
+          onChange={event => this.setState(byPropKey('email', event.target.value))}
+          type="text"
+          placeholder="Email"
+        />
+        <TextInput
+          value={password}
+          onChange={event => this.setState(byPropKey('password', event.target.value))}
+          type="password"
+          placeholder="Password"
+        />
         <SignInBtn disabled={isInvalid} type="submit">
           Sign In
         </SignInBtn>
-        {error && <p>{error.message}</p>}
+
+        <ErrorWrapper>{error && <ErrorMessage>{error.message}</ErrorMessage>}</ErrorWrapper>
       </Form>
     );
   }
