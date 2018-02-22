@@ -48,10 +48,6 @@ const Nav = (props, { authUser }) => (
   </NavWrapper>
 );
 
-Nav.contextTypes = {
-  authUser: PropTypes.object
-};
-
 const NonAuthLinks = () => (
   <LinkWrapper>
     <NavLink to="/sign-in">Sign In</NavLink>
@@ -64,5 +60,9 @@ const AuthLinks = () => (
     <SignOutButton />
   </LinkWrapper>
 );
+
+Nav.contextTypes = {
+  authUser: PropTypes.object
+};
 
 export default Nav;
