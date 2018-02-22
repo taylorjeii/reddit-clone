@@ -41,6 +41,33 @@ const TextArea = styled.textarea`
   width: 100%;
 `;
 
+const Header = styled.h1`
+  color: #fff;
+  font-family: 'Alegreya', serif;
+`;
+
+const SubmitPost = styled.button`
+  background-color: #aebd38;
+  border: 1px solid #fff;
+  color: #fff;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  margin: 0 0.5rem;
+  padding: 0.5rem;
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    background-color: #598234;
+    border-color: #598234;
+  }
+`;
+
+const PleaseLogin = styled.h1`
+  color: #fff;
+  text-align: center;
+`;
+
 class AddPost extends Component {
   constructor(props) {
     super(props);
@@ -85,66 +112,55 @@ class AddPost extends Component {
   };
 
   render() {
-    const Header = styled.h1`
-      color: #fff;
-      font-family: 'Alegreya', serif;
-    `;
+    const { authUser } = this.context;
 
-    const SubmitPost = styled.button`
-      background-color: #aebd38;
-      border: 1px solid #fff;
-      color: #fff;
-      font-family: 'Roboto Condensed', sans-serif;
-      font-size: 1rem;
-      letter-spacing: 1px;
-      margin: 0 0.5rem;
-      padding: 0.5rem;
-      transition: all 0.2s ease-out;
+    if (authUser) {
+      return (
+        <AddPostContainer>
+          <Header>Add A New Post</Header>
+          <form onSubmit={submittedValues => console.log(submittedValues)} id="form">
+            <FormField>
+              <FormLabel htmlFor="posted-by">
+                Name
+                <TextInput
+                  type="text"
+                  id="posted-by"
+                  onChange={this.handlePostedByChange}
+                  value={this.state.postedBy}
+                />
+              </FormLabel>
+            </FormField>
+            <FormField>
+              <FormLabel htmlFor="post-title">
+                Post Title
+                <TextInput type="text" id="post-title" onChange={this.handlePostTitleChange} value={this.state.title} />
+              </FormLabel>
+            </FormField>
+            <FormField>
+              <FormLabel htmlFor="post-body">
+                Post Body
+                <TextArea
+                  type="text"
+                  rows="10"
+                  cols="50"
+                  id="post-body"
+                  onChange={this.handlePostBodyChange}
+                  value={this.state.postBody}
+                />
+              </FormLabel>
+            </FormField>
 
-      &:hover {
-        background-color: #598234;
-        border-color: #598234;
-      }
-    `;
+            <FormField>
+              <SubmitPost type="submit" onClick={this.handleSubmit}>
+                Submit
+              </SubmitPost>
+            </FormField>
+          </form>
+        </AddPostContainer>
+      );
+    }
 
-    return (
-      <AddPostContainer>
-        <Header>Add A New Post</Header>
-        <form onSubmit={submittedValues => console.log(submittedValues)} id="form">
-          <FormField>
-            <FormLabel htmlFor="posted-by">
-              Name
-              <TextInput type="text" id="posted-by" onChange={this.handlePostedByChange} value={this.state.postedBy} />
-            </FormLabel>
-          </FormField>
-          <FormField>
-            <FormLabel htmlFor="post-title">
-              Post Title
-              <TextInput type="text" id="post-title" onChange={this.handlePostTitleChange} value={this.state.title} />
-            </FormLabel>
-          </FormField>
-          <FormField>
-            <FormLabel htmlFor="post-body">
-              Post Body
-              <TextArea
-                type="text"
-                rows="10"
-                cols="50"
-                id="post-body"
-                onChange={this.handlePostBodyChange}
-                value={this.state.postBody}
-              />
-            </FormLabel>
-          </FormField>
-
-          <FormField>
-            <SubmitPost type="submit" onClick={this.handleSubmit}>
-              Submit
-            </SubmitPost>
-          </FormField>
-        </form>
-      </AddPostContainer>
-    );
+    return <PleaseLogin>Sorry, Please Login</PleaseLogin>;
   }
 }
 

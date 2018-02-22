@@ -9,13 +9,82 @@ const LoadingWrapper = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - 90px);
   justify-content: center;
   width: 100vw;
 
   > h1 {
     color: #fff;
   }
+`;
+
+const PostPageContainer = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`;
+
+const PostWrapper = styled.div`
+  align-items: center;
+  background-color: #598234;
+  box-shadow: 0px 0px 3px #222;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin: 1rem 0;
+  padding-bottom: 2rem;
+  width: 30rem;
+`;
+
+const PostTitle = styled.h1`
+  color: #fff;
+  font-family: 'Alegreya', serif;
+  margin-bottom: 0;
+  text-align: center;
+  text-transform: capitalize;
+`;
+
+const VoteCountWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 20rem;
+`;
+
+const VoteCount = styled.p`
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+`;
+
+const VoteButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 20rem;
+`;
+
+const PostHeader = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+`;
+
+const PostText = styled.p`
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+`;
+
+const PostTextWrapper = styled.div`
+  text-align: justify;
+  padding: 0 1rem;
+`;
+
+const PostDate = styled.small`
+  color: #fff;
+`;
+
+const PostedBy = styled.small`
+  color: #fff;
+  font-style: italic;
 `;
 
 class Posts extends Component {
@@ -49,83 +118,15 @@ class Posts extends Component {
 
   render() {
     const { posts } = this.state;
+    const { authUser } = this.context;
 
     if (!posts) {
       return (
         <LoadingWrapper>
-          <h1>Loading...</h1>
+          <h1>{authUser ? 'Loading...' : 'Please Login'}</h1>
         </LoadingWrapper>
       );
     }
-
-    const PostPageContainer = styled.div`
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-    `;
-
-    const PostWrapper = styled.div`
-      align-items: center;
-      background-color: #598234;
-      box-shadow: 0px 0px 3px #222;
-      display: flex;
-      flex-direction: column;
-      margin: 0 auto;
-      margin: 1rem 0;
-      padding-bottom: 2rem;
-      width: 30rem;
-    `;
-
-    const PostTitle = styled.h1`
-      color: #fff;
-      font-family: 'Alegreya', serif;
-      margin-bottom: 0;
-      text-align: center;
-      text-transform: capitalize;
-    `;
-
-    const VoteCountWrapper = styled.div`
-      display: flex;
-      justify-content: space-around;
-      width: 20rem;
-    `;
-
-    const VoteCount = styled.p`
-      color: #fff;
-      font-family: 'Roboto', sans-serif;
-    `;
-
-    const VoteButtonWrapper = styled.div`
-      display: flex;
-      justify-content: space-around;
-      width: 20rem;
-    `;
-
-    const PostHeader = styled.div`
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 1rem;
-    `;
-
-    const PostText = styled.p`
-      color: #fff;
-      font-family: 'Roboto', sans-serif;
-    `;
-
-    const PostTextWrapper = styled.div`
-      text-align: justify;
-      padding: 0 1rem;
-    `;
-
-    const PostDate = styled.small`
-      color: #fff;
-    `;
-
-    const PostedBy = styled.small`
-      color: #fff;
-      font-style: italic;
-    `;
 
     return (
       <PostPageContainer>
@@ -156,5 +157,9 @@ class Posts extends Component {
     );
   }
 }
+
+Posts.contextTypes = {
+  authUser: PropTypes.object
+};
 
 export default Posts;
