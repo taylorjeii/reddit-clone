@@ -7,6 +7,9 @@
     "document": true
   },
   "rules": {
-    "react/forbid-prop-types": "off"
+    "react/forbid-prop-types": "off",
+    "comma-dangle": "off",
+    "arrow-parens": "off",
+    "no-console": "off"
   }
 }
