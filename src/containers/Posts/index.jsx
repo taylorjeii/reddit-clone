@@ -92,8 +92,7 @@ class Posts extends Component {
     super(props);
 
     this.state = {
-      posts: null,
-      loading: true
+      posts: null
     };
     this.handleDownvote = this.handleDownvote.bind(this);
     this.handleUpvote = this.handleUpvote.bind(this);
@@ -134,7 +133,6 @@ class Posts extends Component {
           .map(key => (
             <PostWrapper key={key} id="postWrapper">
               <PostHeader>
-                <p> </p>
                 <PostTitle>{posts[key].title}</PostTitle>
                 <PostDate>{posts[key].postDate}</PostDate>
                 <PostedBy>Posted By: {posts[key].postedBy}</PostedBy>
