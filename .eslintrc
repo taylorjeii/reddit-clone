@@ -10,6 +10,7 @@
     "react/forbid-prop-types": "off",
     "comma-dangle": "off",
     "arrow-parens": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "object-curly-newline": "off"
   }
 }
