@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import * as routes from '../constants/routes';
 import { auth } from '../firebase';
@@ -33,4 +34,9 @@ const SignOutButton = ({ history }) => {
     </SignOutBtn>
   );
 };
+
+SignOutButton.propTypes = {
+  history: PropTypes.object.isRequired
+};
+
 export default withRouter(SignOutButton);
