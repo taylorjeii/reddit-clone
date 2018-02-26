@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import * as routes from '../constants/routes';
 import TextInput from './FormControls/TextInput';
@@ -12,7 +13,7 @@ const INITIAL_STATE = {
   error: null,
   password: '',
   passWordConfirm: '',
-  username: ''
+  name: ''
 };
 
 const byPropKey = (propertyName, value) => () => ({
@@ -35,12 +36,13 @@ class SignUpForm extends Component {
   }
 
   onSubmit = event => {
-    const { email, password } = this.state;
+    const { email, password, name } = this.state;
 
     // create new user
     auth
-      .doCreateUserWithEmailAndPassword(email, password)
-      .then(() => {
+      .doCreateUserWithEmailAndPassword(email, password, name)
+      .then(user => {
+        console.log(user);
         this.setState(() => ({ ...INITIAL_STATE }));
         this.props.history.push(`${routes.HOME}`);
       })
@@ -52,14 +54,15 @@ class SignUpForm extends Component {
   };
 
   render() {
-    const { username, email, password, passWordConfirm, error } = this.state;
-    const isInvalid = password !== passWordConfirm || password === '' || email === '' || username === '';
+    const { name, email, password, passWordConfirm, error } = this.state;
+    const isInvalid =
+      password !== passWordConfirm || password === '' || email === '' || name === '';
 
     return (
       <Form onSubmit={this.onSubmit}>
         <TextInput
-          value={username}
-          onChange={event => this.setState(byPropKey('username', event.target.value))}
+          value={name}
+          onChange={event => this.setState(byPropKey('name', event.target.value))}
           type="text"
           placeholder="Full Name"
         />
@@ -88,5 +91,8 @@ class SignUpForm extends Component {
     );
   }
 }
+SignUpForm.propTypes = {
+  history: PropTypes.object.isRequired
+};
 
 export default SignUpForm;
