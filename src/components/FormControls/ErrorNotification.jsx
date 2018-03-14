@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ErrorMessage = styled.p`
   background: #ff0033;
@@ -16,5 +17,9 @@ const ErrorWrapper = styled.div`
 const ErrorNotification = ({ error }) => (
   <ErrorWrapper>{error && <ErrorMessage>{error.message}</ErrorMessage>}</ErrorWrapper>
 );
+
+ErrorNotification.propTypes = {
+  error: PropTypes.object.isRequired
+};
 
 export default ErrorNotification;

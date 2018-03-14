@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Input = styled.input`
   border: none;
@@ -22,5 +23,12 @@ const TextInput = ({ value, onChange, type, placeholder }) => (
     <Input value={value} onChange={onChange} type={type} placeholder={placeholder} />
   </FormField>
 );
+
+TextInput.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired
+};
 
 export default TextInput;

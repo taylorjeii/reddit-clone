@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { firebase, db } from '../../firebase';
-import { auth } from 'firebase';
+// import { firebase, db } from '../../firebase';
+import { db } from '../../firebase';
+// import { auth } from 'firebase';
 
 const INITIAL_STATE = {
   postBody: '',

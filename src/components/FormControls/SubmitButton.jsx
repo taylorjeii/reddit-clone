@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Button = styled.button`
   background: #598234;
@@ -24,5 +25,10 @@ const SubmitButton = ({ text, disabled }) => (
     {text}
   </Button>
 );
+
+SubmitButton.propTypes = {
+  text: PropTypes.string.isRequired,
+  disabled: PropTypes.bool.isRequired
+};
 
 export default SubmitButton;
