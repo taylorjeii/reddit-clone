@@ -42,7 +42,11 @@ class SignUpForm extends Component {
     auth
       .doCreateUserWithEmailAndPassword(email, password, name)
       .then(user => {
-        console.log(user);
+        if (!user.displayName) {
+          user.updateProfile({
+            displayName: name
+          });
+        }
         this.setState(() => ({ ...INITIAL_STATE }));
         this.props.history.push(`${routes.HOME}`);
       })
