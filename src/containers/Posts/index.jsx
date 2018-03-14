@@ -94,8 +94,6 @@ class Posts extends Component {
     this.state = {
       posts: null
     };
-    // this.handleDownvote = this.handleDownvote.bind(this);
-    // this.handleUpvote = this.handleUpvote.bind(this);
   }
 
   componentWillMount() {

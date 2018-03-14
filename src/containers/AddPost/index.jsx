@@ -74,12 +74,6 @@ class AddPost extends Component {
     super(props);
 
     this.state = { ...INITIAL_STATE };
-
-    this.handlePostTitleChange = this.handlePostTitleChange.bind(this);
-    this.handlePostBodyChange = this.handlePostBodyChange.bind(this);
-    // this.handlePostedByChange = this.handlePostedByChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.printFormValues = this.printFormValues.bind(this);
   }
 
   handlePostTitleChange = e => {
