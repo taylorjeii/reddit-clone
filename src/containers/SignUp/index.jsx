@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import SignUpForm from '../../components/SignUpForm';
 
@@ -22,5 +23,9 @@ const SignUp = ({ history }) => (
     <SignUpForm history={history} />
   </Wrapper>
 );
+
+SignUp.propTypes = {
+  history: PropTypes.object.isRequired
+};
 
 export default withRouter(SignUp);

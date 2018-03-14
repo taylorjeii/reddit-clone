@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { db } from '../../firebase';
+import { firebase, db } from '../../firebase';
+import { auth } from 'firebase';
 
 const INITIAL_STATE = {
   postBody: '',
@@ -75,7 +76,7 @@ class AddPost extends Component {
 
     this.handlePostTitleChange = this.handlePostTitleChange.bind(this);
     this.handlePostBodyChange = this.handlePostBodyChange.bind(this);
-    this.handlePostedByChange = this.handlePostedByChange.bind(this);
+    // this.handlePostedByChange = this.handlePostedByChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.printFormValues = this.printFormValues.bind(this);
   }
@@ -83,12 +84,6 @@ class AddPost extends Component {
   handlePostTitleChange = e => {
     this.setState({
       title: e.target.value
-    });
-  };
-
-  handlePostedByChange = e => {
-    this.setState({
-      postedBy: e.target.value
     });
   };
 
@@ -119,20 +114,14 @@ class AddPost extends Component {
           <Header>Add A New Post</Header>
           <form onSubmit={submittedValues => console.log(submittedValues)} id="form">
             <FormField>
-              <FormLabel htmlFor="posted-by">
-                Name
-                <TextInput
-                  type="text"
-                  id="posted-by"
-                  onChange={this.handlePostedByChange}
-                  value={this.state.postedBy}
-                />
-              </FormLabel>
-            </FormField>
-            <FormField>
               <FormLabel htmlFor="post-title">
                 Post Title
-                <TextInput type="text" id="post-title" onChange={this.handlePostTitleChange} value={this.state.title} />
+                <TextInput
+                  type="text"
+                  id="post-title"
+                  onChange={this.handlePostTitleChange}
+                  value={this.state.title}
+                />
               </FormLabel>
             </FormField>
             <FormField>

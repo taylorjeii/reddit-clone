@@ -94,8 +94,8 @@ class Posts extends Component {
     this.state = {
       posts: null
     };
-    this.handleDownvote = this.handleDownvote.bind(this);
-    this.handleUpvote = this.handleUpvote.bind(this);
+    // this.handleDownvote = this.handleDownvote.bind(this);
+    // this.handleUpvote = this.handleUpvote.bind(this);
   }
 
   componentWillMount() {
@@ -119,6 +119,13 @@ class Posts extends Component {
     const { posts } = this.state;
     const { authUser } = this.context;
 
+    // set display name for currently logged in user
+    if (authUser && !authUser.displayName) {
+      authUser.updateProfile({
+        displayName: 'James Taylor'
+      });
+    }
+
     if (!posts) {
       return (
         <LoadingWrapper>
@@ -129,28 +136,32 @@ class Posts extends Component {
 
     return (
       <PostPageContainer>
-        {Object.keys(posts)
-          .map(key => (
-            <PostWrapper key={key} id="postWrapper">
-              <PostHeader>
-                <PostTitle>{posts[key].title}</PostTitle>
-                <PostDate>{posts[key].postDate}</PostDate>
-                <PostedBy>Posted By: {posts[key].postedBy}</PostedBy>
-              </PostHeader>
-              <PostTextWrapper>
-                <PostText>{posts[key].postBody}</PostText>
-              </PostTextWrapper>
-              <VoteCountWrapper>
-                <VoteCount>Likes: {posts[key].upvote}</VoteCount>
-                <VoteCount>Dislikes: {posts[key].downvote}</VoteCount>
-              </VoteCountWrapper>
-              <VoteButtonWrapper>
-                <LikeButton iconType="fa-thumbs-o-up" onClick={() => this.handleUpvote(posts[key], key)} />
-                <LikeButton iconType="fa-thumbs-o-down" onClick={() => this.handleDownvote(posts[key], key)} />
-              </VoteButtonWrapper>
-            </PostWrapper>
-          ))
-          .reverse()}
+        {Object.keys(posts).map(key => (
+          <PostWrapper key={key} id="postWrapper">
+            <PostHeader>
+              <PostTitle>{posts[key].title}</PostTitle>
+              <PostDate>{posts[key].postDate}</PostDate>
+              <PostedBy>Posted By: {posts[key].postedBy}</PostedBy>
+            </PostHeader>
+            <PostTextWrapper>
+              <PostText>{posts[key].postBody}</PostText>
+            </PostTextWrapper>
+            <VoteCountWrapper>
+              <VoteCount>Likes: {posts[key].upvote}</VoteCount>
+              <VoteCount>Dislikes: {posts[key].downvote}</VoteCount>
+            </VoteCountWrapper>
+            <VoteButtonWrapper>
+              <LikeButton
+                iconType="fa-thumbs-o-up"
+                onClick={() => this.handleUpvote(posts[key], key)}
+              />
+              <LikeButton
+                iconType="fa-thumbs-o-down"
+                onClick={() => this.handleDownvote(posts[key], key)}
+              />
+            </VoteButtonWrapper>
+          </PostWrapper>
+        ))}
       </PostPageContainer>
     );
   }
