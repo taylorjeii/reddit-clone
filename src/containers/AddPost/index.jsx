@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 
 // import { firebase, db } from '../../firebase';
 import { db } from '../../firebase';
+import TextInput from '../../components/FormControls/TextInput';
+import TextBox from '../../components/FormControls/TextBox';
+import SubmitButton from '../../components/FormControls/SubmitButton';
+import ErrorNotification from '../../components/FormControls/ErrorNotification';
 // import { auth } from 'firebase';
 
 const INITIAL_STATE = {
@@ -30,12 +34,6 @@ const FormField = styled.div`
   display: flex;
   flex-direction: column;
   margin: 1rem;
-`;
-
-const TextInput = styled.input`
-  height: 24px;
-  line-height: 1.5;
-  width: 100%;
 `;
 
 const TextArea = styled.textarea`
@@ -67,6 +65,14 @@ const SubmitPost = styled.button`
 const PleaseLogin = styled.h1`
   color: #fff;
   text-align: center;
+`;
+
+const Form = styled.form`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
 `;
 
 class AddPost extends Component {
@@ -102,43 +108,30 @@ class AddPost extends Component {
 
   render() {
     const { authUser } = this.context;
+    const { title, postBody } = this.state;
+    const isInvalid = title === '' || postBody === '';
 
     if (authUser) {
       return (
         <AddPostContainer>
           <Header>Add A New Post</Header>
-          <form onSubmit={submittedValues => console.log(submittedValues)} id="form">
-            <FormField>
-              <FormLabel htmlFor="post-title">
-                Post Title
-                <TextInput
-                  type="text"
-                  id="post-title"
-                  onChange={this.handlePostTitleChange}
-                  value={this.state.title}
-                />
-              </FormLabel>
-            </FormField>
-            <FormField>
-              <FormLabel htmlFor="post-body">
-                Post Body
-                <TextArea
-                  type="text"
-                  rows="10"
-                  cols="50"
-                  id="post-body"
-                  onChange={this.handlePostBodyChange}
-                  value={this.state.postBody}
-                />
-              </FormLabel>
-            </FormField>
-
-            <FormField>
-              <SubmitPost type="submit" onClick={this.handleSubmit}>
-                Submit
-              </SubmitPost>
-            </FormField>
-          </form>
+          <Form onSubmit={submittedValues => console.log(submittedValues)} id="form">
+            <TextInput
+              value={title}
+              onChange={this.handlePostTitleChange}
+              type="text"
+              placeholder="Post Title"
+            />
+            <TextBox
+              type="text"
+              rows="10"
+              columns="50"
+              onChange={this.handlePostBodyChange}
+              value={postBody}
+              placeholder="Enter a your post content"
+            />
+            <SubmitButton disabled={isInvalid} type="submit" text="Add Post" />
+          </Form>
         </AddPostContainer>
       );
     }
