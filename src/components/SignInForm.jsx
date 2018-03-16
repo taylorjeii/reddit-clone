@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import * as routes from '../constants/routes';
 import { auth } from '../firebase';
@@ -73,5 +74,9 @@ class SignInForm extends Component {
     );
   }
 }
+
+SignInForm.propTypes = {
+  history: PropTypes.object.isRequired
+};
 
 export default SignInForm;
