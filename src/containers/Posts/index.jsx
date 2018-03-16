@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import { db } from '../../firebase/';
 import LikeButton from '../../components/LikeButton';
+import { AuthConsumer } from '../../components/Contexts/AuthContext';
 
 const LoadingWrapper = styled.div`
   align-items: center;
@@ -115,7 +115,7 @@ class Posts extends Component {
 
   render() {
     const { posts } = this.state;
-    const { authUser } = this.context;
+    const { authUser } = AuthConsumer._currentValue;
 
     // set display name for currently logged in user
     if (authUser && !authUser.displayName) {
@@ -164,9 +164,5 @@ class Posts extends Component {
     );
   }
 }
-
-Posts.contextTypes = {
-  authUser: PropTypes.object
-};
 
 export default Posts;
