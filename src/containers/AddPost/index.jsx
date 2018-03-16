@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-// import { firebase, db } from '../../firebase';
 import { db } from '../../firebase';
 import TextInput from '../../components/FormControls/TextInput';
 import TextBox from '../../components/FormControls/TextBox';
 import SubmitButton from '../../components/FormControls/SubmitButton';
-// import ErrorNotification from '../../components/FormControls/ErrorNotification';
-// import { auth } from 'firebase';
+import { AuthConsumer } from '../../components/Contexts/AuthContext';
 
 const INITIAL_STATE = {
   postBody: '',
@@ -72,45 +70,45 @@ class AddPost extends Component {
   };
 
   render() {
-    const { authUser } = this.context;
     const { title, postBody } = this.state;
     const isInvalid = title === '' || postBody === '';
 
-    if (authUser) {
-      return (
-        <AddPostContainer>
-          <Header>Add A New Post</Header>
-          <Form onSubmit={submittedValues => console.log(submittedValues)} id="form">
-            <TextInput
-              value={title}
-              onChange={this.handlePostTitleChange}
-              type="text"
-              placeholder="Post Title"
-            />
-            <TextBox
-              type="text"
-              rows="10"
-              columns="50"
-              onChange={this.handlePostBodyChange}
-              value={postBody}
-              placeholder="Enter a your post content"
-            />
-            <SubmitButton disabled={isInvalid} type="submit" text="Add Post" />
-          </Form>
-        </AddPostContainer>
-      );
-    }
-
-    return <PleaseLogin>Sorry, Please Login</PleaseLogin>;
+    return (
+      <AuthConsumer>
+        {({ authUser }) => {
+          if (authUser) {
+            return (
+              <AddPostContainer>
+                <Header>Add A New Post</Header>
+                <Form onSubmit={submittedValues => console.log(submittedValues)} id="form">
+                  <TextInput
+                    value={title}
+                    onChange={this.handlePostTitleChange}
+                    type="text"
+                    placeholder="Post Title"
+                  />
+                  <TextBox
+                    type="text"
+                    rows="10"
+                    columns="50"
+                    onChange={this.handlePostBodyChange}
+                    value={postBody}
+                    placeholder="Enter a your post content"
+                  />
+                  <SubmitButton disabled={isInvalid} type="submit" text="Add Post" />
+                </Form>
+              </AddPostContainer>
+            );
+          }
+          return <PleaseLogin>Sorry, Please Sign In</PleaseLogin>;
+        }}
+      </AuthConsumer>
+    );
   }
 }
 
 AddPost.propTypes = {
   firebase: PropTypes.shape()
-};
-
-AddPost.contextTypes = {
-  authUser: PropTypes.object
 };
 
 export default AddPost;
