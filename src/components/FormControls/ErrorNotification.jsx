@@ -18,8 +18,11 @@ const ErrorNotification = ({ error }) => (
   <ErrorWrapper>{error && <ErrorMessage>{error.message}</ErrorMessage>}</ErrorWrapper>
 );
 
+ErrorNotification.defaultProps = {
+  error: null
+};
 ErrorNotification.propTypes = {
-  error: PropTypes.object.isRequired
+  error: PropTypes.object
 };
 
 export default ErrorNotification;
