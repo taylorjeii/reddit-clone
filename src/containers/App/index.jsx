@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import IsAuthenticated from '../../components/HOCs/IsAuthenticated';
+// import IsAuthenticated from '../../components/HOCs/IsAuthenticated';
 import { AuthProvider } from '../../components/Contexts/AuthContext';
 import * as routes from '../../constants/routes';
 import Landing from '../Home';
@@ -31,4 +31,5 @@ const App = () => (
   </AuthProvider>
 );
 
-export default IsAuthenticated(App);
+export default App;
+// export default IsAuthenticated(App);
