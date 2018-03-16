@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import * as routes from '../constants/routes';
 import SignOutButton from '../components/SignOut';
+import { AuthConsumer } from '../components/Contexts/AuthContext';
 
 const NavWrapper = styled.nav`
   align-items: center;
@@ -42,11 +42,15 @@ const NavLink = styled(Link)`
   }
 `;
 
-const Nav = (props, { authUser }) => (
-  <NavWrapper>
-    <AppTitle>Reddit Clone</AppTitle>
-    {authUser ? <AuthLinks /> : <NonAuthLinks />}
-  </NavWrapper>
+const Nav = () => (
+  <AuthConsumer>
+    {({ authUser }) => (
+      <NavWrapper>
+        <AppTitle>Reddit Clone</AppTitle>
+        {authUser ? <AuthLinks /> : <NonAuthLinks />}
+      </NavWrapper>
+    )}
+  </AuthConsumer>
 );
 
 const NonAuthLinks = () => (
@@ -61,9 +65,5 @@ const AuthLinks = () => (
     <SignOutButton />
   </LinkWrapper>
 );
-
-Nav.contextTypes = {
-  authUser: PropTypes.object
-};
 
 export default Nav;
